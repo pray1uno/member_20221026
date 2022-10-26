@@ -1,2 +1,7 @@
 # Project exclude paths
 /target/
+/.idea/
+/lib/
+/root-context.xml/
+/servlet-context.xml/
+/web.xml/
