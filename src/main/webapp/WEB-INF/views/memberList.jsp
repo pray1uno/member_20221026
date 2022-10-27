@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.rtl.min.css">
     <style>
         table, tr, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
+            /*border: 1px solid black;*/
+            /*border-collapse: collapse;*/
             padding: 10px;
         }
     </style>
@@ -45,7 +45,8 @@
                     <a href="/member?id=${list.id}">상세조회</a>
                 </td>
                 <td>
-                    <a href="/delete?id=${list.id}">삭제</a>
+<%--                    <a href="/delete?id=${list.id}">삭제</a>--%>
+                    <button class="btn btn-danger" onclick="deleteMember('${list.id}')">삭제</button>
                 </td>
             </tr>
         </c:forEach>
@@ -79,4 +80,11 @@
 <%--    <a href="/">Index로 돌아가기</a>--%>
 
 </body>
+<script>
+    const deleteMember = (clickedId) => {
+        <%--console.log('${memberList}');--%>
+        console.log("클릭한 id값 : ", clickedId);
+        location.href = "/delete?id="+clickedId;
+    }
+</script>
 </html>

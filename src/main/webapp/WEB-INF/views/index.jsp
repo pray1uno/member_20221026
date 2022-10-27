@@ -18,9 +18,9 @@
     <a href="/save">회원가입</a> <br>
     <a href="/login">로그인</a> <br>
     <a href="/members">회원목록 출력</a> <br>
-    <button class="btn btn-primary" onclick="saveFn()">회원가입</button> <br>
-    <button class="btn btn-danger" onclick="loginFn()">로그인</button> <br>
-    <button class="btn btn-dark" onclick="listFn()">회원목록</button> <br>
+    <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
+    <button class="btn btn-danger" onclick="loginFn()">로그인</button>
+    <button class="btn btn-dark" onclick="listFn()">회원목록</button>
 
 </body>
 <script>
