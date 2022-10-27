@@ -18,6 +18,7 @@
             <input type="text" name="memberPassword" placeholder="비밀번호" class="form-control"> <br>
             <input type="button" value="로그인" onclick="login()" class="btn btn-primary">
         </form>
+        <a href="/">Index로 돌아가기</a>
     </div>
 <%--    <form action="/login" method="post">--%>
 <%--        이메일 <br>--%>
@@ -27,7 +28,7 @@
 <%--        <input type="submit" value="로그인">--%>
 
 <%--        <a href="/">Index로 돌아가기</a>--%>
-    </form>
+<%--    </form>--%>
 </body>
 <script>
     const login = () => {

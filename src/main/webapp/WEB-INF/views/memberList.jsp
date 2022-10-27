@@ -31,6 +31,7 @@
             <th>Age</th>
             <th>Mobile</th>
             <th>조회</th>
+            <th>삭제</th>
         </tr>
         <c:forEach items="${memberList}" var="list">
             <tr>
@@ -43,8 +44,12 @@
                 <td>
                     <a href="/member?id=${list.id}">상세조회</a>
                 </td>
+                <td>
+                    <a href="/delete?id=${list.id}">삭제</a>
+                </td>
             </tr>
         </c:forEach>
+        <a href="/">Index로 돌아가기</a>
     </table>
 </div>
 
