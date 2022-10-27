@@ -22,6 +22,13 @@ public class MemberRepository {
 
     }
 
+//    public MemberDTO login(String memberEmail, String memberPassword) {
+//        MemberDTO memberDTO = new MemberDTO();
+//        memberDTO.setMemberEmail(memberEmail);
+//        memberDTO.setMemberPassword(memberPassword);
+//        return sql.selectOne("Member.memberLogin", memberDTO);
+//    }
+
     public List<MemberDTO> list() {
         return sql.selectList("Member.memberList");
     }
@@ -34,6 +41,7 @@ public class MemberRepository {
     public int delete(int delete) {
         return sql.delete("Member.memberDelete", delete);
     }
+
 
 
 }

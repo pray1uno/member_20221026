@@ -9,9 +9,14 @@
 <html>
 <head>
     <title>memberMain</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.rtl.min.css">
 </head>
 <body>
-    <h2>메인 페이지</h2>
-    <a href="/">Index로 돌아가기</a>
+    <div class="container">
+        <h2>${sessionScope.loginEmail}님 환영합니다.</h2>
+        <h2>model값 : ${modelEmail}</h2>
+
+        <a href="/">Index로 돌아가기</a>
+    </div>
 </body>
 </html>

@@ -26,6 +26,15 @@ public class MemberService {
         return memberRepository.login(memberDTO);
     }
 
+//    public boolean login(String memberEmail, String memberPassword) {
+//        MemberDTO memberDTO = memberRepository.login(memberEmail, memberPassword);
+//        if (memberDTO != null) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
     public List<MemberDTO> list() {
         return memberRepository.list();
     }
@@ -34,8 +43,9 @@ public class MemberService {
         return memberRepository.findResult(findResult);
     }
 
-public int delete(int delete) {
+    public int delete(int delete) {
         return memberRepository.delete(delete);
-}
+    }
+
 
 }
