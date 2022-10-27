@@ -7,9 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>memberList</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.rtl.min.css">
     <style>
         table, tr, th, td {
             border: 1px solid black;
@@ -19,30 +21,57 @@
     </style>
 </head>
 <body>
-<table>
-    <tr>
-        <th>번호</th>
-        <th>이메일</th>
-        <th>비밀번호</th>
-        <th>이름</th>
-        <th>나이</th>
-        <th>전화번호</th>
-        <th>회원삭제</th>
-    </tr>
+<div class="container">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Mobile</th>
+            <th>조회</th>
+        </tr>
+        <c:forEach items="${memberList}" var="list">
+            <tr>
+                <td>${list.id}</td>
+                <td>${list.memberEmail}</td>
+                <td>${list.memberPassword}</td>
+                <td>${list.memberName}</td>
+                <td>${list.memberAge}</td>
+                <td>${list.memberMobile}</td>
+                <td>
+                    <a href="/member?id=${list.id}">상세조회</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 
-    <c:forEach items="${memberList}" var="list">
-    <tr>
-    <td>${list.id}</td>
-    <td><a href="/member?id=${list.id}">${list.memberEmail}</a></td>
-    <td>${list.memberPassword}</td>
-    <td>${list.memberName}</td>
-    <td>${list.memberAge}</td>
-    <td>${list.memberMobile}</td>
-    <td><button value="삭제하기"><a href="/delete?id=${list.id}">삭제하기</a></button></td>
-    </tr>
-    </c:forEach> <br>
-</table>
-    <a href="/">Index로 돌아가기</a>
+<%--<table>--%>
+<%--    <tr>--%>
+<%--        <th>번호</th>--%>
+<%--        <th>이메일</th>--%>
+<%--        <th>비밀번호</th>--%>
+<%--        <th>이름</th>--%>
+<%--        <th>나이</th>--%>
+<%--        <th>전화번호</th>--%>
+<%--        <th>회원삭제</th>--%>
+<%--    </tr>--%>
+
+<%--    <c:forEach items="${memberList}" var="list">--%>
+<%--    <tr>--%>
+<%--    <td>${list.id}</td>--%>
+<%--    <td><a href="/member?id=${list.id}">${list.memberEmail}</a></td>--%>
+<%--    <td>${list.memberPassword}</td>--%>
+<%--    <td>${list.memberName}</td>--%>
+<%--    <td>${list.memberAge}</td>--%>
+<%--    <td>${list.memberMobile}</td>--%>
+<%--    <td><button value="삭제하기"><a href="/delete?id=${list.id}">삭제하기</a></button></td>--%>
+<%--    </tr>--%>
+<%--    </c:forEach> <br>--%>
+<%--</table>--%>
+<%--    <a href="/">Index로 돌아가기</a>--%>
 
 </body>
 </html>
