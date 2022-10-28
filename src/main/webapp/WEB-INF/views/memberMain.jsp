@@ -19,6 +19,7 @@
 <%--        <a href="/update">내 정보 수정하기</a>--%>
 
         <button class="btn btn-warning" onclick="updateForm()">내 정보 수정하기</button>
+        <button class="btn btn-danger" onclick="logout()">로그아웃</button>
         <a href="/">Index로 돌아가기</a>
     </div>
 </body>
@@ -26,6 +27,11 @@
     const updateForm = () => {
         // /update 주소를 요청하는 update 함수
         location.href = "/update";
+    }
+
+    const logout = () => {
+        location.href = "/logout";
+
     }
 </script>
 </html>
