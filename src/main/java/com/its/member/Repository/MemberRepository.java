@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Repository
@@ -43,5 +44,11 @@ public class MemberRepository {
     }
 
 
+    public MemberDTO update(String memberEmail) {
+        return sql.selectOne("Member.memberUpdate", memberEmail);
+    }
 
+    public int updateLogin(MemberDTO memberDTO) {
+        return sql.update("Member.updateLogin", memberDTO);
+    }
 }

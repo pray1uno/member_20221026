@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 import java.util.List;
 
 
@@ -47,18 +48,6 @@ public class MemberController {
         return "memberMain";
     }
 
-//    @PostMapping("/login")
-//    public String postLogin(@RequestParam("memberEmail") String memberEmail,
-//                            @RequestParam("memberPassword") String memberPassword) {
-//        boolean loginResult = memberService.login(memberEmail, memberPassword);
-//        if (loginResult) {
-//            return "memberMain";
-//        } else {
-//            return "memberLogin";
-//        }
-//    }
-
-
     @GetMapping("/members")
     public String getMembers(Model model) {
         List<MemberDTO> memberList = memberService.list();
@@ -85,6 +74,33 @@ public class MemberController {
 
         // 2. redirect 방식을 이용하여 /members 주소 요청
         return "redirect:/members";
+    }
+
+    @GetMapping("/update")
+    public String update(Model model, HttpSession session) {
+        // session 값 가져오기
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        System.out.println("memberEmail = " + memberEmail);
+        // abstract = 추상메서드(실행 블록이 없는 메서드)
+        // memberEmail로 DB에서 해당 회원의 전체 정보 조회
+        MemberDTO result = memberService.update(memberEmail);
+        model.addAttribute("member", result);
+        System.out.println("result = " + result);
+//        List<MemberDTO> updateList = memberService.update();
+//        model.addAttribute("update", updateList);
+        return "memberUpdate";
+    }
+
+    @PostMapping("/update")
+    public String postUpdate(@ModelAttribute MemberDTO memberDTO) {
+        boolean result = memberService.updateLogin(memberDTO);
+         if (result) {
+            // 로그인 회원의 memberDetail.jsp
+            return "redirect:/member?id=" + memberDTO.getId();
+         } else {
+             return "index";
+         }
+
     }
 
 

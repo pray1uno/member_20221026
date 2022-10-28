@@ -24,6 +24,18 @@
     <delete id="memberDelete" parameterType="Integer">
         delete from member_table where id = #{delete}
     </delete>
+
+    <select id="updateList" resultType="memberDTO">
+        update member_table set memberEmail = #{loginData}
+    </select>
+
+    <select id="memberUpdate" parameterType="String" resultType="memberDTO">
+        select * from member_table where memberEmail = #{memberEmail}
+    </select>
+
+    <update id="updateLogin" parameterType="memberDTO">
+        update member_table set memberName = #{memberName}, memberAge = #{memberAge} where id = #{id}
+    </update>
 </mapper>
 
 

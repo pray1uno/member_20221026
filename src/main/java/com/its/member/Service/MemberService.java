@@ -5,6 +5,7 @@ import com.its.member.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Service
@@ -21,19 +22,18 @@ public class MemberService {
         }
     }
 
-
-    public MemberDTO login(MemberDTO memberDTO) {
-        return memberRepository.login(memberDTO);
-    }
-
-//    public boolean login(String memberEmail, String memberPassword) {
-//        MemberDTO memberDTO = memberRepository.login(memberEmail, memberPassword);
+//    public boolean login(MemberDTO loginDTO) {
+//        MemberDTO memberDTO = memberRepository.login(loginDTO);
 //        if (memberDTO != null) {
 //            return true;
 //        } else {
 //            return false;
 //        }
 //    }
+
+    public MemberDTO login(MemberDTO memberDTO) {
+        return memberRepository.login(memberDTO);
+    }
 
     public List<MemberDTO> list() {
         return memberRepository.list();
@@ -48,4 +48,17 @@ public class MemberService {
     }
 
 
+    public MemberDTO update(String memberEmail) {
+        return memberRepository.update(memberEmail);
+    }
+
+
+    public boolean updateLogin(MemberDTO memberDTO) {
+        int result = memberRepository.updateLogin(memberDTO);
+        if (result > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
