@@ -41,11 +41,16 @@ public class MemberController {
     @PostMapping("/login")
     public String postLogin(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
         System.out.println("memberDTO = " + memberDTO + ", model = " + model + ", session = " + session);
-        MemberDTO loginResult = memberService.login(memberDTO);
-        model.addAttribute("modelEmail", memberDTO.getMemberEmail());
-        // 세션에 로그인한 사용자의 이메일을 저장
-        session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-        return "memberMain";
+        boolean loginResult = memberService.login(memberDTO);
+
+        if (loginResult) {
+            model.addAttribute("modelEmail", memberDTO.getMemberEmail());
+            // 세션에 로그인한 사용자의 이메일을 저장
+            session.setAttribute("loginEmail", memberDTO.getMemberEmail());
+            return "memberMain";
+        } else {
+            return "memberLogin";
+        }
     }
 
     @GetMapping("/members")

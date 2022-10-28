@@ -31,8 +31,14 @@ public class MemberService {
 //        }
 //    }
 
-    public MemberDTO login(MemberDTO memberDTO) {
-        return memberRepository.login(memberDTO);
+    public boolean login(MemberDTO memberDTO) {
+//        return memberRepository.login(memberDTO);
+        MemberDTO login = memberRepository.login(memberDTO);
+        if (login != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<MemberDTO> list() {
