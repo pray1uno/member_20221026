@@ -12,6 +12,7 @@
 <head>
     <title>memberList</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.rtl.min.css">
+    <script src="/resources/js/jquery.js"></script>
     <style>
         table, tr, th, td {
             /*border: 1px solid black;*/
@@ -32,6 +33,7 @@
             <th>Mobile</th>
             <th>조회</th>
             <th>삭제</th>
+            <th>조회(ajax)</th>
         </tr>
         <c:forEach items="${memberList}" var="list">
             <tr>
@@ -48,36 +50,17 @@
 <%--                    <a href="/delete?id=${list.id}">삭제</a>--%>
                     <button class="btn btn-danger" onclick="deleteMember('${list.id}')">삭제</button>
                 </td>
+                <td>
+                    <button class="btn btn-primary" onclick="findMember('${list.id}')">조회</button>
+                </td>
             </tr>
         </c:forEach>
         <a href="/">Index로 돌아가기</a>
     </table>
+    <div id="detail-area">
+
+    </div>
 </div>
-
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>번호</th>--%>
-<%--        <th>이메일</th>--%>
-<%--        <th>비밀번호</th>--%>
-<%--        <th>이름</th>--%>
-<%--        <th>나이</th>--%>
-<%--        <th>전화번호</th>--%>
-<%--        <th>회원삭제</th>--%>
-<%--    </tr>--%>
-
-<%--    <c:forEach items="${memberList}" var="list">--%>
-<%--    <tr>--%>
-<%--    <td>${list.id}</td>--%>
-<%--    <td><a href="/member?id=${list.id}">${list.memberEmail}</a></td>--%>
-<%--    <td>${list.memberPassword}</td>--%>
-<%--    <td>${list.memberName}</td>--%>
-<%--    <td>${list.memberAge}</td>--%>
-<%--    <td>${list.memberMobile}</td>--%>
-<%--    <td><button value="삭제하기"><a href="/delete?id=${list.id}">삭제하기</a></button></td>--%>
-<%--    </tr>--%>
-<%--    </c:forEach> <br>--%>
-<%--</table>--%>
-<%--    <a href="/">Index로 돌아가기</a>--%>
 
 </body>
 <script>
@@ -85,6 +68,51 @@
         <%--console.log('${memberList}');--%>
         console.log("클릭한 id값 : ", clickedId);
         location.href = "/delete?id="+clickedId;
+    }
+
+    const findMember = (findId) => {
+        console.log("findId", findId);
+        const detailArea = document.getElementById("detail-area");
+
+        $.ajax({
+            type: "get",
+            url: "/detail-ajax",
+            dataType: "json",
+            data: {
+                id : findId
+            },
+            success: function (result) {
+                console.log("result : ", result);
+                console.log("조회id : ", result.id);
+                let areaResult =
+                    "        <table class=\"table table-striped\">\n" +
+                    "            <tr>\n" +
+                    "                <th>id</th>\n" +
+                    "                <td>"+ result.id +"</td>\n" +
+                    "            </tr>\n" +
+                    "            <tr>\n" +
+                    "                <th>email</th>\n" +
+                    "                <td>" + result.memberEmail + "</td>\n" +
+                    "            </tr>\n" +
+                    "            <tr>\n" +
+                    "                <th>password</th>\n" +
+                    "                <td>" + result.memberPassword + "</td>\n" +
+                    "            </tr>\n" +
+                    "            <tr>\n" +
+                    "                <th>name</th>\n" +
+                    "                <td> " + result.memberName + "</td>\n" +
+                    "            </tr>\n" +
+                    "            <tr>\n" +
+                    "                <th>age</th>\n" +
+                    "                <td>" + result.memberAge + "</td>\n" +
+                    "            </tr>\n" +
+                    "        </table>";
+                detailArea.innerHTML = areaResult;
+            },
+            error: function () {
+                console.log("실패");
+            }
+        });
     }
 </script>
 </html>

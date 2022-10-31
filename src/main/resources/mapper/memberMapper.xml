@@ -40,6 +40,7 @@
     <select id="duplicateCheck" parameterType="String" resultType="String">
         select memberEmail from member_table where memberEmail = #{membetEmail}
     </select>
+
 </mapper>
 
 
