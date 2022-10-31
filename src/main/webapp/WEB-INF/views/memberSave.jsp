@@ -10,6 +10,7 @@
 <head>
     <title>memberSave.jsp</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.rtl.min.css">
+    <script src="/resources/js/jquery.js"></script>
     <style>
         #save-form {
             width: 1000px;
@@ -19,7 +20,8 @@
 <body>
     <div class="container" id="save-form">
         <form action="/save" method="post" name="saveForm">
-            <input type="text" name="memberEmail" placeholder="이메일" class="form-control">
+            <input type="text" name="memberEmail" placeholder="이메일" class="form-control" onblur="emailDuplicateCheck()" id="newIdForm">
+            <span id="email-dup-check"></span> <br>
             <span id="email-input-check"></span> <br>
             <input type="text" name="memberPassword" placeholder="비밀번호" class="form-control">
             <span id="password-input-check"></span> <br>
@@ -34,20 +36,7 @@
 <%--           form 태그 안에서 button은 제출의 역할을 함. 바로 전송 돼버리기 때문에 button 태그 사용에 주의해야 함 --%>
         </form>
     </div>
-<%--    <h2>신규 회원가입</h2>--%>
-<%--    <form action="/save" method="post">--%>
-<%--        이메일 <br>--%>
-<%--        <input type="text" name="memberEmail"> <br>--%>
-<%--        비밀번호 <br>--%>
-<%--        <input type="text" name="memberPassword"> <br>--%>
-<%--        이름 <br>--%>
-<%--        <input type="text" name="memberName"> <br>--%>
-<%--        나이 <br>--%>
-<%--        <input type="text" name="memberAge"> <br>--%>
-<%--        전화번호 <br>--%>
-<%--        <input type="text" name="memberMobile"> <br>--%>
-<%--        <input type="submit" value="회원가입">--%>
-<%--    </form>--%>
+
 </body>
 <script>
     const save = () => {
@@ -87,5 +76,32 @@
     const btn1Fn = () => {
         console.log("btn1Fn 함수 호출");
     }
+
+    const emailDuplicateCheck = () => {
+        const email = document.getElementById("newIdForm").value;
+        const checkResult = document.getElementById("email-dup-check");
+        console.log("입력한 이메일 : ", email);
+        $.ajax({
+           type: "post",
+           url: "/duplicate-check",
+           dataType: "text",
+            data: {inputEmail : email},
+           success: function (result) {
+               console.log("checkResult: ", result);
+               if (result == "ok") {
+                   checkResult.innerHTML = "사용할 수 있는 이메일 입니다.";
+                   checkResult.style.color = "green";
+               } else {
+                   checkResult.innerHTML = "이미 사용중인 이메일 입니다.";
+                   checkResult.style.color = "red";
+               }
+           },
+            error: function () {
+               console.log("실패");
+            }
+        });
+
+    }
+
 </script>
 </html>

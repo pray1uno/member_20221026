@@ -21,6 +21,7 @@
     <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
     <button class="btn btn-danger" onclick="loginFn()">로그인</button>
     <button class="btn btn-dark" onclick="listFn()">회원목록</button>
+    <button class="btn btn-success" onclick="ajaxEx()">ajax 연습</button>
 
 </body>
 <script>
@@ -35,6 +36,11 @@
 
     const listFn = () => {
         location.href = "/members";
+    }
+
+    const ajaxEx = () => {
+        location.href = "/ajax-ex";
+
     }
 
 </script>
